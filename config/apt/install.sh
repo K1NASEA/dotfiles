@@ -24,6 +24,7 @@ apt-get install -y \
 	openssl \
 	procps \
 	shellcheck \
+	software-properties-common \
 	telnet \
 	unzip \
 	wget \
