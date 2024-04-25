@@ -3,7 +3,7 @@
 set -e  # Exit immediately if a command files
 set -u  # Treat unset variables as errors
 
-source /etc/os-release
+. /etc/os-release
 
 if [ "$ID" = "ubuntu" ]; then
 	add-apt-repository -y ppa:git-core/ppa
