@@ -150,7 +150,7 @@ setup_homebrew() {
 
   if test ! "$(command -v brew)"; then
     info "Homebrew not installed. Installing."
-    
+
     if test "$(command -v apt-get)"; then
       sudo apt-get -y install build-essential procps curl file git
     elif test "$(command -v yum)"; then
@@ -159,27 +159,29 @@ setup_homebrew() {
     elif test "$(command -v pacman)"; then
       sudo pacman -S --noconfirm base-devel procps-ng curl file git
     fi
-    
+
     # Run as a login shell (non-interactive) so that the script doesn't pause for user input
     curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash --login
-    
+
     if [ "$(uname)" == "Linux" ]; then
       test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
       test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-      test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
     fi
   fi
 
   # Cloning Dotfiles
   if [ -d "$DOTFILES" ]; then
-    cd
-    rm -rf "$DOTFILES"
-  fi
-  git clone https://github.com/K1NASEA/dotfiles.git "$DOTFILES"
-  cd "$DOTFILES"
+    pushd "$DOTFILES"
+    git pull
+    popd
+  else
+    git clone https://github.com/K1NASEA/dotfiles.git "$DOTFILES"
+    pushd "$DOTFILES"
+fi
 
   # install brew dependencies from Brewfile
   brew bundle
+  popd
 
   # install fzf
   echo -e
