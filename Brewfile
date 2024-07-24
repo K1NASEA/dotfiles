@@ -15,6 +15,7 @@ brew "htop" # a top alternative
 brew "jq" # work with JSON files in shell scripts
 brew "neovim" # A better vim
 brew "ripgrep" # very fast file searcher
+brew "shfmt" # shell formatter
 brew "starship" # The minimal, blazing-fast, and infinitely customizable prompt
 brew "tree" # pretty-print directory contents
 brew "vim" # Vim (latest)
