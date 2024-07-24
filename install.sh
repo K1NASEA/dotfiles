@@ -174,12 +174,12 @@ setup_homebrew() {
     pushd "$DOTFILES"
     git pull
     popd
+  else
+    git clone https://github.com/K1NASEA/dotfiles.git "$DOTFILES"
   fi
 
-  git clone https://github.com/K1NASEA/dotfiles.git "$DOTFILES"
-  pushd "$DOTFILES"
-
   # install brew dependencies from Brewfile
+  pushd "$DOTFILES"
   brew bundle
   popd
 
