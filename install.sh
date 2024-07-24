@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-set -e  # Exit immediately if a command exits with a non-zero status.
-set -u  # Treat unset variables as errors.
+set -e # Exit immediately if a command exits with a non-zero status.
+set -u # Treat unset variables as errors.
 
 DOTFILES="${INSTALL_DIR:-$HOME/repos/github.com/K1NASEA/dotfiles}"
 
@@ -21,9 +21,9 @@ linkables=(
   "zsh/.zshrc"
   "zsh/.zshenv"
   "zsh/.zprofile"
-#  "zsh/.zsh_aliases"
-#  "zsh/.zsh_functions"
-#  "zsh/.zsh_prompt"
+  #  "zsh/.zsh_aliases"
+  #  "zsh/.zsh_functions"
+  #  "zsh/.zsh_prompt"
 )
 
 usage() {
@@ -71,7 +71,7 @@ backup() {
   done
 
   for filename in "$XDG_CONFIG_HOME/nvim" "$HOME/.vim" "$HOME/.vimrc"; do
-    if [ ! -L "$filename" ] && [ -d "$filename" ] ; then
+    if [ ! -L "$filename" ] && [ -d "$filename" ]; then
       echo "backing up $filename"
       cp -rf "$filename" "$BACKUP_DIR"
     else
@@ -174,10 +174,10 @@ setup_homebrew() {
     pushd "$DOTFILES"
     git pull
     popd
-  else
-    git clone https://github.com/K1NASEA/dotfiles.git "$DOTFILES"
-    pushd "$DOTFILES"
-fi
+  fi
+
+  git clone https://github.com/K1NASEA/dotfiles.git "$DOTFILES"
+  pushd "$DOTFILES"
 
   # install brew dependencies from Brewfile
   brew bundle
