@@ -18,16 +18,16 @@ COLOR_GRAY="\033[1;37m"
 COLOR_NONE="\033[0m"
 
 linkables=(
-  "zsh/.zshrc"
-  "zsh/.zshenv"
-  "zsh/.zprofile"
-  #  "zsh/.zsh_aliases"
-  #  "zsh/.zsh_functions"
-  #  "zsh/.zsh_prompt"
+  # "zsh/.zshenv"
+  # "zsh/.zshrc"
+  # "zsh/.zprofile"
+  # "zsh/.zsh_aliases"
+  # "zsh/.zsh_functions"
+  # "zsh/.zsh_prompt"
 )
 
 usage() {
-  echo -e $"\nUsage: $(basename "$0") {backup|link|homebrew|shell|all}\n"
+  echo -e $"\nUsage: $(basename "$0") {backup|link|homebrew|shell|japanese|all}\n"
   exit 1
 }
 
@@ -184,9 +184,15 @@ setup_homebrew() {
   popd
 
   # install fzf
-  echo -e
-  info "Installing fzf"
-  "$(brew --prefix)"/opt/fzf/install --key-bindings --completion --no-update-rc --no-bash --no-fish
+  #echo -e
+  #info "Installing fzf"
+  #"$(brew --prefix)"/opt/fzf/install --key-bindings --completion --no-update-rc --no-bash --no-fish --xdg
+
+  # Workaround for perl warnings
+  if brew list | grep -q "^perl$" && brew list | grep -q "^glibc$"; then
+    "$(brew --prefix glibc)/bin/localedef" -c -i C -f UTF-8 C.UTF-8 2>/dev/null
+    "$(brew --prefix glibc)/bin/localedef" -c -i ja_JP -f UTF-8 ja_JP.UTF-8 2>/dev/null
+  fi
 }
 
 setup_shell() {
@@ -201,6 +207,21 @@ setup_shell() {
   if [ "$SHELL" != "$zsh_path" ]; then
     chsh -s "$zsh_path"
     info "default shell changed to $zsh_path"
+  fi
+
+  if [ ! -f /etc/zshenv ]; then
+    echo "export ZDOTDIR=\"\${HOME}/.config/zsh\"" | sudo tee /etc/zshenv >/dev/null
+  fi
+}
+
+setup_japanese() {
+  title "Set Japanese localization"
+
+  if test "$(command -v apt-get)"; then
+    cat /etc/*release | grep "^ID=" | grep -iq "debian" && sudo apt-get -y install task-japanese locales-all
+    cat /etc/*release | grep "^ID=" | grep -iq "ubuntu" && sudo apt-get -y install language-pack-ja-base language-pack-ja
+  elif test "$(command -v yum)"; then
+    sudo yum -y install langpacks-core-ja
   fi
 }
 
@@ -223,6 +244,9 @@ homebrew)
   ;;
 shell)
   setup_shell
+  ;;
+japanese)
+  setup_japanese
   ;;
 all)
   setup_homebrew
