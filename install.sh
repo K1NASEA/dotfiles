@@ -205,7 +205,11 @@ setup_shell() {
   fi
 
   if [ "$SHELL" != "$zsh_path" ]; then
-    chsh -s "$zsh_path"
+    if test "$(command -v chsh)"; then
+      chsh -s "$zsh_path"
+    else
+      sudo usermod --shell "$zsh_path" "$LOGNAME"
+    fi
     info "default shell changed to $zsh_path"
   fi
 
