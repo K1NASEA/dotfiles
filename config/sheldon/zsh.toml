@@ -31,12 +31,24 @@ apply = ["defer"]
 github = 'zsh-users/zsh-completions'
 apply = ["defer"]
 
+[plugins.fzf]
+local = '~/.config/fzf'
+use =['*.zsh']
+apply = ["defer"]
+
 [plugins.fzf-tab]
 github = 'Aloxaf/fzf-tab'
 apply = ["defer"]
 
-[plugins.compinit]
-inline = 'autoload -Uz compinit && zsh-defer compinit'
+[plugins.zsh-load-sync]
+local = '~/.config/zsh/load_sync'
+use = ['*.zsh']
+apply = ['source']
 
-[plugins.colors]
-inline = 'autoload -Uz colors && zsh-defer colors'
+[plugins.zsh-load-defer]
+local = '~/.config/zsh/load_defer'
+use = ['*.zsh']
+apply = ['defer']
+
+[plugins.starship]
+inline = 'zsh-defer eval "$(starship init zsh)"'

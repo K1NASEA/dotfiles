@@ -133,6 +133,13 @@ setup_symlinks() {
     mkdir -p "$XDG_DATA_HOME"
   fi
 
+  if [ ! -d "$XDG_STATE_HOME" ]; then
+    info "Creating $XDG_STATE_HOME"
+    mkdir -p "$XDG_STATE_HOME"
+    chmod 0700 "$XDG_STATE_HOME"
+    mkdir "${XDG_STATE_HOME}/zsh"
+  fi
+
   config_files=$(find "$DOTFILES/config" -maxdepth 1 2>/dev/null)
   for config in $config_files; do
     target="$XDG_CONFIG_HOME/$(basename "$config")"
@@ -140,7 +147,7 @@ setup_symlinks() {
       info "~${target#"$HOME"} already exists... Skipping."
     else
       info "Creating symlink for $config"
-      ln -s "$config" "$target"
+      ln -snf "$config" "$target"
     fi
   done
 }

@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 # reload zsh config
 alias reload!='RELOAD=1 source ${ZDOTDIR}/.zshrc'
 
