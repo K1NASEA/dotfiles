@@ -220,9 +220,24 @@ setup_shell() {
     info "default shell changed to $zsh_path"
   fi
 
-  if [ ! -f /etc/zshenv ]; then
-    echo "export ZDOTDIR=\"\${HOME}/.config/zsh\"" | sudo tee /etc/zshenv >/dev/null
+  if [ -d /etc/zsh ]; then
+    if [ ! -f /etc/zsh/zshenv ]; then
+      echo "test -d \"\${HOME}/.config/zsh\" && export ZDOTDIR=\"\${HOME}/.config/zsh\"" | sudo tee /etc/zsh/zshenv >/dev/null
+    fi
+  else
+    if [ ! -f /etc/zshenv ]; then
+      echo "test -d \"\${HOME}/.config/zsh\" && export ZDOTDIR=\"\${HOME}/.config/zsh\"" | sudo tee /etc/zshenv >/dev/null
+    fi
   fi
+
+  if [ ! -f /etc/profile.d/bash_xdg.sh ]; then
+    echo "test -f \"\${HOME}/.config/bash/.bashrc\" && source \"\${HOME}/.config/bash/.bashrc\"" | sudo tee /etc/profile.d/bash_xdg.sh >/dev/null
+  fi
+
+  if [ ! -f /etc/bash/bashrc.d/bash_xdg.sh ]; then
+    echo "test -f \"\${HOME}/.config/bash/.bashrc\" && source \"\${HOME}/.config/bash/.bashrc\"" | sudo tee /etc/bash/bashrc.d/bash_xdg.sh >/dev/null
+  fi
+
 }
 
 setup_japanese() {

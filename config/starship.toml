@@ -26,11 +26,18 @@ $docker_context\
 $time\
 [ ](fg:#33658A)\
 $line_break\
+$shell\
 $character\
 """
 
 # Disable the blank line at the start of the prompt
 # add_newline = false
+
+# An alternative to the username module which displays a symbol that
+# represents the current operating system
+[os]
+style = "bg:#009E96"
+disabled = true      # Disabled by default
 
 # You can also replace your username with a neat symbol like   or disable this
 # and use the os module below
@@ -40,12 +47,6 @@ style_user = "bg:#009E96 fg:white"
 style_root = "bg:#009E96 fg:white"
 format = '[$user ]($style)'
 disabled = false
-
-# An alternative to the username module which displays a symbol that
-# represents the current operating system
-[os]
-style = "bg:#9A348E"
-disabled = true # Disabled by default
 
 [directory]
 style = "bg:#DA627D"
@@ -141,9 +142,16 @@ format = '[ $symbol ($version) ]($style)'
 
 [time]
 disabled = false
-time_format = "%T" # Hour:Minute Format
+time_format = "%T"           # Hour:Minute Format
 style = "bg:#33658A"
 format = '[ $time ]($style)'
+
+[shell]
+zsh_indicator = ''
+bash_indicator = '\$ '
+style = "fg:#666666"
+format = '[$indicator]($style)'
+disabled = false
 
 [character]
 success_symbol = "[❯](fg:#009E96)"

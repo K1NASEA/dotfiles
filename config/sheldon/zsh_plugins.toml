@@ -33,12 +33,16 @@ apply = ["defer"]
 
 [plugins.fzf]
 local = '~/.config/fzf'
-use =['*.zsh']
+use = ['fzf.zsh']
 apply = ["defer"]
 
-[plugins.fzf-tab]
-github = 'Aloxaf/fzf-tab'
+[plugins.fzf-tab-completion]
+github = 'lincheney/fzf-tab-completion'
+use = ['fzf-zsh-completion.sh']
 apply = ["defer"]
+
+[plugins.fzf-tab-completion-bind]
+inline = 'zsh-defer bindkey "^I" fzf_completion'
 
 [plugins.zsh-load-sync]
 local = '~/.config/zsh/load_sync'
