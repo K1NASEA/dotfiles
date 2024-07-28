@@ -35,3 +35,5 @@ fi
 # shellcheck source=/dev/null
 source "$sheldon_cache"
 unset sheldon_cache
+
+HISTFILE="${XDG_STATE_HOME}/bash/history"

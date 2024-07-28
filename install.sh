@@ -138,6 +138,7 @@ setup_symlinks() {
     mkdir -p "$XDG_STATE_HOME"
     chmod 0700 "$XDG_STATE_HOME"
     mkdir "${XDG_STATE_HOME}/zsh"
+    mkdir "${XDG_STATE_HOME}/bash"
   fi
 
   config_files=$(find "$DOTFILES/config" -maxdepth 1 2>/dev/null)
