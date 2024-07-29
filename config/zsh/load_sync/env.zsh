@@ -7,6 +7,9 @@ fi
 # PATH
 export PATH="${HOME}/repos/github.com/K1NASEA/dotfiles/bin:${PATH}"
 
+# wget config
+export WGETRC="${XDG_CONFIG_HOME}/wget/.wgetrc"
+
 # history for less command
 export LESSHISTFILE="${XDG_STATE_HOME}/less/history"
 

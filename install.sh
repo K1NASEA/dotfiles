@@ -140,6 +140,7 @@ setup_symlinks() {
     mkdir -m 0700"${XDG_STATE_HOME}/zsh"
     mkdir -m 0700 "${XDG_STATE_HOME}/bash"
     mkdir -m 0700 "${XDG_STATE_HOME}/less"
+    mkdir -m 0700 "${XDG_STATE_HOME}/wget"
   fi
 
   config_files=$(find "$DOTFILES/config" -maxdepth 1 2>/dev/null)
