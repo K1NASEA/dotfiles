@@ -137,8 +137,9 @@ setup_symlinks() {
     info "Creating $XDG_STATE_HOME"
     mkdir -p "$XDG_STATE_HOME"
     chmod 0700 "$XDG_STATE_HOME"
-    mkdir "${XDG_STATE_HOME}/zsh"
-    mkdir "${XDG_STATE_HOME}/bash"
+    mkdir -m 0700"${XDG_STATE_HOME}/zsh"
+    mkdir -m 0700 "${XDG_STATE_HOME}/bash"
+    mkdir -m 0700 "${XDG_STATE_HOME}/less"
   fi
 
   config_files=$(find "$DOTFILES/config" -maxdepth 1 2>/dev/null)
@@ -252,6 +253,19 @@ setup_japanese() {
   fi
 }
 
+setup_git() {
+  title "Setting up Git"
+
+  defaultName=$(git config user.name)
+  defaultEmail=$(git config user.email)
+
+  read -rp "Name [$defaultName]: " name
+  read -rp "Email [$defaultEmail]: " email
+
+  git config -f "${XDG_CONFIG_HOME}/.gitconfig-local" user.name "${name:-$defaultName}"
+  git config -f "${XDG_CONFIG_HOME}/.gitconfig-local" user.email "${email:-$defaultEmail}"
+}
+
 if [ $# -eq 0 ]; then
   usage
 fi
@@ -280,7 +294,6 @@ all)
   setup_symlinks
   setup_shell
   setup_git
-  setup_macos
   ;;
 *)
   usage

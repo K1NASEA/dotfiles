@@ -1,0 +1,7 @@
+# vim:ft=gitconfig
+[init]
+    defaultBranch = main
+[include]
+    # A local gitconfig, outside of version control.
+    # If the file doesn't exist it is silently ignored
+    path = ~/.config/.gitconfig-local
