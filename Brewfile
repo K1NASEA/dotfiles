@@ -19,6 +19,5 @@ brew "sheldon" # Fast, configurable, shell plugin manager
 brew "shfmt" # shell formatter
 brew "starship" # The minimal, blazing-fast, and infinitely customizable prompt
 brew "tree" # pretty-print directory contents
-brew "vim" # Vim (latest)
 brew "wget" # internet file retriever
 brew "zsh" # zsh (latest)

@@ -198,10 +198,10 @@ setup_homebrew() {
   #"$(brew --prefix)"/opt/fzf/install --key-bindings --completion --no-update-rc --no-bash --no-fish --xdg
 
   # Workaround for perl warnings
-  if brew list | grep -q "^perl$" && brew list | grep -q "^glibc$"; then
-    "$(brew --prefix glibc)/bin/localedef" -c -i C -f UTF-8 C.UTF-8 2>/dev/null
-    "$(brew --prefix glibc)/bin/localedef" -c -i ja_JP -f UTF-8 ja_JP.UTF-8 2>/dev/null
-  fi
+  #if brew list | grep -q "^perl$" && brew list | grep -q "^glibc$"; then
+  #  "$(brew --prefix glibc)/bin/localedef" -c -i C -f UTF-8 C.UTF-8 2>/dev/null
+  #  "$(brew --prefix glibc)/bin/localedef" -c -i ja_JP -f UTF-8 ja_JP.UTF-8 2>/dev/null
+  #fi
 }
 
 setup_shell() {

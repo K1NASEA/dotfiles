@@ -38,7 +38,9 @@ alias tns='tmux new-session -s'
 
 # use nvim, but don't make me think about it
 if [[ -n "$(command -v nvim)" ]]; then
+    alias vi="nvim"
     alias vim="nvim"
+    alias view="nvim -R"
     # shortcut to open vim and immediately update vim-plug and all installed plugins
     alias vimu="nvim --headless \"+Lazy! sync\" +qa"
     # immediately open to fugitive's status screen
