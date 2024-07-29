@@ -23,5 +23,9 @@ use = ['fzf-bash-completion.sh']
 [plugins.fzf-tab-completion-bind]
 inline = 'bind -x "\"\t\": fzf_bash_completion"'
 
+[plugins.bash-load]
+local = '~/.config/bash/load'
+use = ['*.sh']
+
 [plugins.starship]
 inline = 'eval "$(starship init bash)"'

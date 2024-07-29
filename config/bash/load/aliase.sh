@@ -1,5 +1,6 @@
-# reload zsh config
-alias reload!='RELOAD=1 source ${ZDOTDIR}/.zshrc'
+#shellcheck shell=bash
+# reload bash config
+alias reload!='RELOAD=1 source ${XDG_CONFIG_HOME}/bash/.bashrc'
 
 # Filesystem aliases
 alias ..='cd ..'
