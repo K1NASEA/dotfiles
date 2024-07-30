@@ -8,6 +8,7 @@ brew "eza" # ls alternative
 brew "fastfetch" # pretty system info
 brew "fd" # find alternative
 brew "fzf" # Fuzzy file searcher, used in scripts and in vim
+brew "ghq" # Manage remote repository clones
 brew "git" # Git version control (latest version)
 brew "git-delta" # a better git diff
 brew "grep" # grep (latest)
