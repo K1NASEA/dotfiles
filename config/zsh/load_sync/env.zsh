@@ -7,6 +7,9 @@ fi
 # PATH
 export PATH="${HOME}/repos/github.com/K1NASEA/dotfiles/bin:${PATH}"
 
+# docker config
+export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+
 # wget config
 export WGETRC="${XDG_CONFIG_HOME}/wget/.wgetrc"
 
