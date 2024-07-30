@@ -22,3 +22,14 @@ bindkey -M viins "^F" vi-forward-word # [Ctrl-f] - move to next word
 bindkey -M viins "^E" vi-add-eol      # [Ctrl-e] - move to end of line
 bindkey "^J" history-beginning-search-forward
 bindkey "^K" history-beginning-search-backward
+
+function ghq-fzf() {
+    local src=$(ghq list | fzf --border --reverse --height=100% --preview "bat --color=always --style=grid $(ghq root)/{}/README.*")
+    if [ -n "$src" ]; then
+        BUFFER="cd $(ghq root)/$src"
+        zle accept-line
+    fi
+    zle -R -c
+}
+zle -N ghq-fzf
+bindkey '^G' ghq-fzf
