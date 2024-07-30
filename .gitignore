@@ -1,3 +1,2 @@
 Brewfile.lock.json
-config/zsh/site-functions/**
-!config/zsh/site-functions/_dummy
+config/docker/buildx/**

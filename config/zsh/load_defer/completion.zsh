@@ -1,6 +1,7 @@
 fpath=(
+    /usr/share/zsh/site-functions
+    /usr/share/zsh/vendor-completions
     $fpath
-    ${ZDOTDIR}/site-functions
 )
 [ ! -d "${XDG_CACHE_HOME}/zsh" ] && mkdir -p "${XDG_CACHE_HOME}/zsh"
 autoload -Uz compinit && compinit -d "${XDG_CACHE_HOME}/zsh/zcompdump-$ZSH_VERSION"
