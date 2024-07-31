@@ -180,7 +180,7 @@ setup_shell() {
     if test "$(command -v chsh)"; then
       chsh -s "$zsh_path"
     else
-      $SUDO usermod --shell "$zsh_path" "$LOGNAME"
+      $SUDO usermod --shell "$zsh_path" "$(id -un)"
     fi
     info "default shell changed to $zsh_path"
   fi
