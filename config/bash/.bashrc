@@ -10,6 +10,7 @@ export EDITOR='nvim'
 export GIT_EDITOR='nvim'
 export LANG='C'
 export LC_CTYPE='C.UTF-8'
+export TERM='xterm-256color'
 
 # load Homebrew
 if [[ -f /opt/homebrew/bin/brew ]]; then
