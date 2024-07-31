@@ -11,12 +11,6 @@ export GIT_EDITOR='nvim'
 export LANG='C'
 export LC_CTYPE='C.UTF-8'
 
-# wget config
-export WGETRC="${XDG_CONFIG_HOME}/wget/.wgetrc"
-
-# history for less command
-export LESSHISTFILE="${XDG_STATE_HOME}/less/history"
-
 # load Homebrew
 if [[ -f /opt/homebrew/bin/brew ]]; then
 	# Homebrew exists at /opt/homebrew for arm64 macos
