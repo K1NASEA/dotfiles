@@ -199,9 +199,9 @@ setup_shell() {
     echo "test -f \"\${HOME}/.config/bash/.bashrc\" && source \"\${HOME}/.config/bash/.bashrc\"" | $SUDO tee /etc/profile.d/bash_xdg.sh >/dev/null
   fi
 
-  if [ ! -f /etc/bash/bashrc.d/bash_xdg.sh ]; then
-    echo "test -f \"\${HOME}/.config/bash/.bashrc\" && source \"\${HOME}/.config/bash/.bashrc\"" | $SUDO tee /etc/bash/bashrc.d/bash_xdg.sh >/dev/null
-  fi
+  # if [ ! -f /etc/bash/bashrc.d/bash_xdg.sh ]; then
+  #   echo "test -f \"\${HOME}/.config/bash/.bashrc\" && source \"\${HOME}/.config/bash/.bashrc\"" | $SUDO tee /etc/bash/bashrc.d/bash_xdg.sh >/dev/null
+  # fi
 
 }
 
