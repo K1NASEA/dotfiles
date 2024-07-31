@@ -17,14 +17,12 @@ COLOR_PURPLE="\033[1;35m"
 COLOR_GRAY="\033[1;37m"
 COLOR_NONE="\033[0m"
 
-linkables=(
-  # "zsh/.zshenv"
-  # "zsh/.zshrc"
-  # "zsh/.zprofile"
-  # "zsh/.zsh_aliases"
-  # "zsh/.zsh_functions"
-  # "zsh/.zsh_prompt"
-)
+# Check the permissions of the execution user
+SUDO=""
+if [ "$EUID" -ne 0 ]; then
+  # Add sudo for general users
+  SUDO="sudo"
+fi
 
 usage() {
   echo -e $"\nUsage: $(basename "$0") {backup|link|homebrew|shell|japanese|all}\n"
@@ -54,46 +52,25 @@ success() {
 }
 
 backup() {
+  title "Backing up dotfiles"
   BACKUP_DIR=$HOME/dotfiles-backup
 
   echo "Creating backup directory at $BACKUP_DIR"
   mkdir -p "$BACKUP_DIR"
 
-  for file in "${linkables[@]}"; do
-    filename="$(basename "$file")"
-    target="$HOME/$filename"
-    if [ -f "$target" ]; then
-      echo "backing up $filename"
-      cp "$target" "$BACKUP_DIR"
+  for config in $config_files; do
+    target="$XDG_CONFIG_HOME/$(basename "$config")"
+    if [ ! -L "$target" ] && [ -d "$target" ]; then
+      info "Backing up \"$target\""
+      cp -rf "$target" "$BACKUP_DIR"
     else
-      warning "$filename does not exist at this location or is a symlink"
-    fi
-  done
-
-  for filename in "$XDG_CONFIG_HOME/nvim" "$HOME/.vim" "$HOME/.vimrc"; do
-    if [ ! -L "$filename" ] && [ -d "$filename" ]; then
-      echo "backing up $filename"
-      cp -rf "$filename" "$BACKUP_DIR"
-    else
-      warning "$filename does not exist at this location or is a symlink"
+      warning "$target does not exist at this location or is a symlink"
     fi
   done
 }
 
 cleanup_symlinks() {
   title "Cleaning up symlinks"
-  for file in "${linkables[@]}"; do
-    target="$HOME/$(basename "$file")"
-    if [ -L "$target" ]; then
-      info "Cleaning up \"$target\""
-      rm "$target"
-    elif [ -e "$target" ]; then
-      warning "Skipping \"$target\" because it is not a symlink"
-    else
-      warning "Skipping \"$target\" because it does not exist"
-    fi
-  done
-
   config_files=$(find "$DOTFILES/config" -maxdepth 1 2>/dev/null)
   for config in $config_files; do
     target="$XDG_CONFIG_HOME/$(basename "$config")"
@@ -111,36 +88,11 @@ cleanup_symlinks() {
 setup_symlinks() {
   title "Creating symlinks"
 
-  for file in "${linkables[@]}"; do
-    target="$HOME/$(basename "$file")"
-    if [ -e "$target" ]; then
-      info "~${target#"$HOME"} already exists... Skipping."
-    else
-      info "Creating symlink for $file"
-      ln -s "$DOTFILES/$file" "$target"
-    fi
-  done
-
   echo -e
   info "installing to $XDG_CONFIG_HOME"
   if [ ! -d "$XDG_CONFIG_HOME" ]; then
     info "Creating $XDG_CONFIG_HOME"
     mkdir -p "$XDG_CONFIG_HOME"
-  fi
-
-  if [ ! -d "$XDG_DATA_HOME" ]; then
-    info "Creating $XDG_DATA_HOME"
-    mkdir -p "$XDG_DATA_HOME"
-  fi
-
-  if [ ! -d "$XDG_STATE_HOME" ]; then
-    info "Creating $XDG_STATE_HOME"
-    mkdir -p "$XDG_STATE_HOME"
-    chmod 0700 "$XDG_STATE_HOME"
-    mkdir -m 0700"${XDG_STATE_HOME}/zsh"
-    mkdir -m 0700 "${XDG_STATE_HOME}/bash"
-    mkdir -m 0700 "${XDG_STATE_HOME}/less"
-    mkdir -m 0700 "${XDG_STATE_HOME}/wget"
   fi
 
   config_files=$(find "$DOTFILES/config" -maxdepth 1 2>/dev/null)
@@ -153,6 +105,21 @@ setup_symlinks() {
       ln -snf "$config" "$target"
     fi
   done
+
+  if [ ! -d "$XDG_DATA_HOME" ]; then
+    info "Creating $XDG_DATA_HOME"
+    mkdir -p "$XDG_DATA_HOME"
+  fi
+
+  if [ ! -d "$XDG_STATE_HOME" ]; then
+    info "Creating $XDG_STATE_HOME"
+    mkdir -p "$XDG_STATE_HOME"
+    chmod 0700 "$XDG_STATE_HOME"
+    mkdir -m 0700 "${XDG_STATE_HOME}/zsh"
+    mkdir -m 0700 "${XDG_STATE_HOME}/bash"
+    mkdir -m 0700 "${XDG_STATE_HOME}/less"
+    mkdir -m 0700 "${XDG_STATE_HOME}/wget"
+  fi
 }
 
 setup_homebrew() {
@@ -162,12 +129,12 @@ setup_homebrew() {
     info "Homebrew not installed. Installing."
 
     if test "$(command -v apt-get)"; then
-      sudo apt-get -y install build-essential procps curl file git
+      $SUDO apt-get -y install build-essential procps curl file git
     elif test "$(command -v yum)"; then
-      sudo yum -y groupinstall 'Development Tools'
-      sudo yum -y install procps-ng curl file git
+      $SUDO yum -y groupinstall 'Development Tools'
+      $SUDO yum -y install procps-ng curl file git
     elif test "$(command -v pacman)"; then
-      sudo pacman -S --noconfirm base-devel procps-ng curl file git
+      $SUDO pacman -S --noconfirm base-devel procps-ng curl file git
     fi
 
     # Run as a login shell (non-interactive) so that the script doesn't pause for user input
@@ -193,11 +160,6 @@ setup_homebrew() {
   brew bundle
   popd
 
-  # install fzf
-  #echo -e
-  #info "Installing fzf"
-  #"$(brew --prefix)"/opt/fzf/install --key-bindings --completion --no-update-rc --no-bash --no-fish --xdg
-
   # Workaround for perl warnings
   #if brew list | grep -q "^perl$" && brew list | grep -q "^glibc$"; then
   #  "$(brew --prefix glibc)/bin/localedef" -c -i C -f UTF-8 C.UTF-8 2>/dev/null
@@ -211,34 +173,34 @@ setup_shell() {
   [[ -n "$(command -v brew)" ]] && zsh_path="$(brew --prefix)/bin/zsh" || zsh_path="$(which zsh)"
   if ! grep "$zsh_path" /etc/shells; then
     info "adding $zsh_path to /etc/shells"
-    echo "$zsh_path" | sudo tee -a /etc/shells
+    echo "$zsh_path" | $SUDO tee -a /etc/shells
   fi
 
   if [ "$SHELL" != "$zsh_path" ]; then
     if test "$(command -v chsh)"; then
       chsh -s "$zsh_path"
     else
-      sudo usermod --shell "$zsh_path" "$LOGNAME"
+      $SUDO usermod --shell "$zsh_path" "$LOGNAME"
     fi
     info "default shell changed to $zsh_path"
   fi
 
   if [ -d /etc/zsh ]; then
     if [ ! -f /etc/zsh/zshenv ]; then
-      echo "test -d \"\${HOME}/.config/zsh\" && export ZDOTDIR=\"\${HOME}/.config/zsh\"" | sudo tee /etc/zsh/zshenv >/dev/null
+      echo "test -d \"\${HOME}/.config/zsh\" && export ZDOTDIR=\"\${HOME}/.config/zsh\"" | $SUDO tee /etc/zsh/zshenv >/dev/null
     fi
   else
     if [ ! -f /etc/zshenv ]; then
-      echo "test -d \"\${HOME}/.config/zsh\" && export ZDOTDIR=\"\${HOME}/.config/zsh\"" | sudo tee /etc/zshenv >/dev/null
+      echo "test -d \"\${HOME}/.config/zsh\" && export ZDOTDIR=\"\${HOME}/.config/zsh\"" | $SUDO tee /etc/zshenv >/dev/null
     fi
   fi
 
   if [ ! -f /etc/profile.d/bash_xdg.sh ]; then
-    echo "test -f \"\${HOME}/.config/bash/.bashrc\" && source \"\${HOME}/.config/bash/.bashrc\"" | sudo tee /etc/profile.d/bash_xdg.sh >/dev/null
+    echo "test -f \"\${HOME}/.config/bash/.bashrc\" && source \"\${HOME}/.config/bash/.bashrc\"" | $SUDO tee /etc/profile.d/bash_xdg.sh >/dev/null
   fi
 
   if [ ! -f /etc/bash/bashrc.d/bash_xdg.sh ]; then
-    echo "test -f \"\${HOME}/.config/bash/.bashrc\" && source \"\${HOME}/.config/bash/.bashrc\"" | sudo tee /etc/bash/bashrc.d/bash_xdg.sh >/dev/null
+    echo "test -f \"\${HOME}/.config/bash/.bashrc\" && source \"\${HOME}/.config/bash/.bashrc\"" | $SUDO tee /etc/bash/bashrc.d/bash_xdg.sh >/dev/null
   fi
 
 }
@@ -247,10 +209,10 @@ setup_japanese() {
   title "Set Japanese localization"
 
   if test "$(command -v apt-get)"; then
-    cat /etc/*release | grep "^ID=" | grep -iq "debian" && sudo apt-get -y install task-japanese locales-all
-    cat /etc/*release | grep "^ID=" | grep -iq "ubuntu" && sudo apt-get -y install language-pack-ja-base language-pack-ja
+    cat /etc/*release | grep "^ID=" | grep -iq "debian" && $SUDO apt-get -y install task-japanese locales-all
+    cat /etc/*release | grep "^ID=" | grep -iq "ubuntu" && $SUDO apt-get -y install language-pack-ja-base language-pack-ja
   elif test "$(command -v yum)"; then
-    sudo yum -y install langpacks-core-ja
+    $SUDO yum -y install langpacks-core-ja
   fi
 }
 
@@ -295,6 +257,7 @@ all)
   setup_symlinks
   setup_shell
   setup_git
+  setup_japanese
   ;;
 *)
   usage
