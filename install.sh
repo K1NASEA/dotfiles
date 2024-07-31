@@ -132,7 +132,7 @@ setup_homebrew() {
       $SUDO apt-get -y install build-essential procps curl file git
     elif test "$(command -v yum)"; then
       $SUDO yum -y groupinstall 'Development Tools'
-      $SUDO yum -y install procps-ng curl file git
+      $SUDO yum -y install procps-ng curl file git --allowerasing
     elif test "$(command -v pacman)"; then
       $SUDO pacman -S --noconfirm base-devel procps-ng curl file git
     fi
