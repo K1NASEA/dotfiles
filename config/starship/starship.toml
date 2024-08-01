@@ -1,13 +1,16 @@
 format = """
-[](fg:#009E96)\
+[](fg:#282C34 bg:#009E96)\
 $os\
 $username\
-[](bg:#DA627D fg:#009E96)\
+[](fg:#009E96 bg:#282C34)\
+[](fg:#282C34 bg:#DA627D)\
 $directory\
-[](fg:#DA627D bg:#EB5505)\
+[](fg:#DA627D bg:#282C34)\
+[](fg:#282C34 bg:#EB5505)\
 $git_branch\
 $git_status\
-[](fg:#EB5505 bg:#86BBD8)\
+[](fg:#EB5505 bg:#282C34)\
+[](fg:#282C34 bg:#86BBD8)\
 $c\
 $elixir\
 $elm\
@@ -20,9 +23,11 @@ $nodejs\
 $nim\
 $rust\
 $scala\
-[](fg:#86BBD8 bg:#06969A)\
+[](fg:#86BBD8 bg:#282C34)\
+[](fg:#282C34 bg:#06969A)\
 $docker_context\
-[](fg:#06969A bg:#33658A)\
+[](fg:#06969A bg:#282C34)\
+[](fg:#282C34 bg:#33658A)\
 $time\
 [ ](fg:#33658A)\
 $line_break\
@@ -45,7 +50,7 @@ disabled = true      # Disabled by default
 show_always = true
 style_user = "bg:#009E96 fg:white"
 style_root = "bg:#009E96 fg:white"
-format = '[$user ]($style)'
+format = '[ $user ]($style)'
 disabled = false
 
 [directory]

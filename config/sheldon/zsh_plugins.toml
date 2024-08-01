@@ -30,7 +30,10 @@ use = ['*.zsh']
 apply = ['defer']
 
 [plugins.starship]
-inline = 'zsh-defer eval "$(starship init zsh)"'
+inline = '''
+    export STARSHIP_CONFIG="${XDG_CONFIG_HOME}/starship/starship.toml"
+    zsh-defer eval "$(starship init zsh)"
+'''
 
 [plugins.syntax-highlight]
 github = 'z-shell/F-Sy-H'
@@ -54,5 +57,5 @@ github = 'lincheney/fzf-tab-completion'
 use = ['fzf-zsh-completion.sh']
 apply = ["defer"]
 
-[plugins.fzf-tab-completion-bind]
-inline = 'zsh-defer bindkey "^I" fzf_completion'
+[plugins.fzf-tab-completion.hooks]
+post = 'bindkey "^I" fzf_completion'

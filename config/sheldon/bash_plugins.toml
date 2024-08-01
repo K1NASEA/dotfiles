@@ -12,6 +12,16 @@
 
 shell = "bash"
 
+[plugins.bash-load]
+local = '~/.config/bash/load'
+use = ['*.sh']
+
+[plugins.starship]
+inline = '''
+    export STARSHIP_CONFIG="${XDG_CONFIG_HOME}/starship/starship.toml"
+    eval "$(starship init zsh)"
+'''
+
 [plugins.fzf]
 local = '~/.config/fzf'
 use = ['fzf.bash']
@@ -20,12 +30,5 @@ use = ['fzf.bash']
 github = 'lincheney/fzf-tab-completion'
 use = ['fzf-bash-completion.sh']
 
-[plugins.fzf-tab-completion-bind]
-inline = 'bind -x "\"\t\": fzf_bash_completion"'
-
-[plugins.bash-load]
-local = '~/.config/bash/load'
-use = ['*.sh']
-
-[plugins.starship]
-inline = 'eval "$(starship init bash)"'
+[plugins.fzf-tab-completion.hooks]
+post = 'bind -x "\"\t\": fzf_bash_completion"'
