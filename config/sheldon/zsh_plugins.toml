@@ -19,6 +19,19 @@ defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file 
 github = "romkatv/zsh-defer"
 apply = ['source']
 
+[plugins.zsh-load-sync]
+local = '~/.config/zsh/load_sync'
+use = ['*.zsh']
+apply = ['source']
+
+[plugins.zsh-load-defer]
+local = '~/.config/zsh/load_defer'
+use = ['*.zsh']
+apply = ['defer']
+
+[plugins.starship]
+inline = 'zsh-defer eval "$(starship init zsh)"'
+
 [plugins.syntax-highlight]
 github = 'z-shell/F-Sy-H'
 apply = ["defer"]
@@ -43,16 +56,3 @@ apply = ["defer"]
 
 [plugins.fzf-tab-completion-bind]
 inline = 'zsh-defer bindkey "^I" fzf_completion'
-
-[plugins.zsh-load-sync]
-local = '~/.config/zsh/load_sync'
-use = ['*.zsh']
-apply = ['source']
-
-[plugins.zsh-load-defer]
-local = '~/.config/zsh/load_defer'
-use = ['*.zsh']
-apply = ['defer']
-
-[plugins.starship]
-inline = 'zsh-defer eval "$(starship init zsh)"'
