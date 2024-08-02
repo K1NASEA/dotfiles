@@ -19,7 +19,7 @@ use = ['*.sh']
 [plugins.starship]
 inline = '''
     export STARSHIP_CONFIG="${XDG_CONFIG_HOME}/starship/starship.toml"
-    eval "$(starship init zsh)"
+    eval "$(starship init bash)"
 '''
 
 [plugins.fzf]
