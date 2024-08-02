@@ -1,5 +1,4 @@
 format = """
-[](fg:#282C34 bg:#009E96)\
 $os\
 $username\
 [](fg:#009E96 bg:#282C34)\

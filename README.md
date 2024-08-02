@@ -115,6 +115,7 @@ curl -sL https://raw.githubusercontent.com/K1NASEA/dotfiles/main/install.sh | ba
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
+[product-screenshot]: images/screenshot.png
 [homebrew-logo]: https://img.shields.io/badge/homebrew-grey?style=flat&logo=homebrew
 [homebrew-url]: https://brew.sh/
 [zsh-logo]: https://img.shields.io/badge/zsh-grey?style=flat&logo=zsh
