@@ -16,11 +16,9 @@ alias path='echo $PATH | tr ":" "\n"' # list the PATH separated by new lines
 
 # use eza if available
 if [[ -x "$(command -v eza)" ]]; then
-    alias l="eza --git --all --long --group --time-style='+%Y-%m-%dT%H:%M:%S'"
-    alias ll="eza --git --long --group --time-style='+%Y-%m-%dT%H:%M:%S'"
+    alias ll="eza --git --all --long --group --time-style='+%Y-%m-%dT%H:%M:%S'"
 else
-    alias l="ls -lah"
-    alias ll="ls -lFh"
+    alias ll="ls -lah"
 fi
 alias la="ls -AF"
 alias lld="ls -l | grep ^d"
