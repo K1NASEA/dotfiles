@@ -207,8 +207,8 @@ setup_git() {
   defaultName=$(git config user.name || true)
   defaultEmail=$(git config user.email || true)
 
-  read -rp "Name [$defaultName]: " name
-  read -rp "Email [$defaultEmail]: " email
+  read -rp "Name [$defaultName]: " name </dev/tty
+  read -rp "Email [$defaultEmail]: " email </dev/tty
 
   git config -f "${XDG_CONFIG_HOME}/.gitconfig-local" user.name "${name:-$defaultName}"
   git config -f "${XDG_CONFIG_HOME}/.gitconfig-local" user.email "${email:-$defaultEmail}"
