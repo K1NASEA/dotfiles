@@ -61,45 +61,51 @@ Run install.sh as shown below.
 ### Installation
 
 ```sh
-curl -sL https://raw.githubusercontent.com/K1NASEA/dotfiles/main/install.sh | bash -s -- all
+curl -sL https://raw.githubusercontent.com/K1NASEA/dotfiles/main/install.sh | bash
 ```
 
 ### Other usages
 
-- Backup symlinks
+- Uninstall
 
   ```sh
-  curl -sL https://raw.githubusercontent.com/K1NASEA/dotfiles/main/install.sh | bash -s -- backup
+  ./install.sh | bash -s -- uninstall
   ```
 
-- Cleanup symlinks
+- Backup dotfiles
 
   ```sh
-  curl -sL https://raw.githubusercontent.com/K1NASEA/dotfiles/main/install.sh | bash -s -- clean
+  ./install.sh | bash -s -- backup
   ```
 
 - Setup symlinks
 
   ```sh
-  curl -sL https://raw.githubusercontent.com/K1NASEA/dotfiles/main/install.sh | bash -s -- link
+  ./install.sh | bash -s -- link
   ```
 
 - Setup Homebrew
 
   ```sh
-  curl -sL https://raw.githubusercontent.com/K1NASEA/dotfiles/main/install.sh | bash -s -- homebrew
+  ./install.sh | bash -s -- homebrew
   ```
 
 - Setup Shell
 
   ```sh
-  curl -sL https://raw.githubusercontent.com/K1NASEA/dotfiles/main/install.sh | bash -s -- shell
+  ./install.sh | bash -s -- shell
+  ```
+
+- Setup git
+
+  ```sh
+  ./install.sh | bash -s -- git
   ```
 
 - Setup Japanese localization
 
   ```sh
-  curl -sL https://raw.githubusercontent.com/K1NASEA/dotfiles/main/install.sh | bash -s -- japanese
+  ./install.sh | bash -s -- japanese
   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
