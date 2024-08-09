@@ -126,7 +126,6 @@ setup_homebrew() {
 setup_symlinks() {
   title "Creating symlinks"
 
-  echo -e
   info "installing to $XDG_CONFIG_HOME"
   if [ ! -d "$XDG_CONFIG_HOME" ]; then
     info "Creating $XDG_CONFIG_HOME"
@@ -165,7 +164,7 @@ setup_shell() {
   [[ -n "$(command -v brew)" ]] && zsh_path="$(brew --prefix)/bin/zsh" || zsh_path="$(which zsh)"
   if ! grep "$zsh_path" /etc/shells; then
     info "adding $zsh_path to /etc/shells"
-    echo "$zsh_path" | $SUDO tee -a /etc/shells
+    echo "$zsh_path" | $SUDO tee -a /etc/shells >/dev/null
   fi
 
   if [ "$SHELL" != "$zsh_path" ]; then
@@ -205,8 +204,8 @@ setup_shell() {
 setup_git() {
   title "Setting up Git"
 
-  defaultName=$(git config user.name)
-  defaultEmail=$(git config user.email)
+  defaultName=$(git config user.name || true)
+  defaultEmail=$(git config user.email || true)
 
   read -rp "Name [$defaultName]: " name
   read -rp "Email [$defaultEmail]: " email

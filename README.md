@@ -61,7 +61,7 @@ Run install.sh as shown below.
 ### Installation
 
 ```sh
-curl -sL https://raw.githubusercontent.com/K1NASEA/dotfiles/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/K1NASEA/dotfiles/main/install.sh | bash
 ```
 
 ### Other usages
@@ -69,43 +69,43 @@ curl -sL https://raw.githubusercontent.com/K1NASEA/dotfiles/main/install.sh | ba
 - Uninstall
 
   ```sh
-  ./install.sh | bash -s -- uninstall
+  ./install.sh uninstall
   ```
 
 - Backup dotfiles
 
   ```sh
-  ./install.sh | bash -s -- backup
+  ./install.sh backup
   ```
 
 - Setup symlinks
 
   ```sh
-  ./install.sh | bash -s -- link
+  ./install.sh link
   ```
 
 - Setup Homebrew
 
   ```sh
-  ./install.sh | bash -s -- homebrew
+  ./install.sh homebrew
   ```
 
 - Setup Shell
 
   ```sh
-  ./install.sh | bash -s -- shell
+  ./install.sh shell
   ```
 
 - Setup git
 
   ```sh
-  ./install.sh | bash -s -- git
+  ./install.sh git
   ```
 
 - Setup Japanese localization
 
   ```sh
-  ./install.sh | bash -s -- japanese
+  ./install.sh japanese
   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
