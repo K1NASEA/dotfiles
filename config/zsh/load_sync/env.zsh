@@ -18,3 +18,7 @@ export LESSHISTFILE="${XDG_STATE_HOME}/less/history"
 
 export REPORTTIME=10 # Report command execution time if it exceeds 10 seconds
 export KEYTIMEOUT=1  # Time in deciseconds (0.1 second) to wait for a key sequence to complete
+
+# Editor
+export EDITOR='nvim'
+export GIT_EDITOR='nvim'
