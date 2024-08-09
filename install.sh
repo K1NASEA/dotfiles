@@ -228,12 +228,13 @@ setup_japanese() {
 
 uninstall_shell() {
   title "Uninstall shell"
-  
-  for $target in "/etc/zsh/zshenv" "/etc/zshenv" "/etc/bash/bashrc.d/bash_xdg.sh" "/etc/profile.d/bash_xdg.sh"; do
-  if [ -f "$target" ];then
-    info "Cleaning up \"$target\""
-    rm -f "$target"
-  fi
+
+  for target in "/etc/zsh/zshenv" "/etc/zshenv" "/etc/bash/bashrc.d/bash_xdg.sh" "/etc/profile.d/bash_xdg.sh"; do
+    if [ -f "$target" ]; then
+      info "Cleaning up \"$target\""
+      rm -f "$target"
+    fi
+  done
 }
 
 uninstall_dotfiles() {
