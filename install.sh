@@ -204,7 +204,7 @@ setup_shell() {
 setup_git() {
   title "Setting up Git"
 
-  defaultName=$(git config user.name || echo "")
+  defaultName=$(git config user.name || true)
   defaultEmail=$(git config user.email || true)
 
   read -rp "Name [$defaultName]: " name
