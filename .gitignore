@@ -1,3 +1,2 @@
 Brewfile.lock.json
-config/docker/buildx/**
-config/docker/.token_seed*
+config/docker
