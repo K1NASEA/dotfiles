@@ -138,7 +138,7 @@ setup_symlinks() {
       info "~${target#"$HOME"} already exists... Skipping."
     else
       info "Creating symlink for $config"
-      ln -snf "${DOTFILES}/${config}" "$target"
+      ln -snf "${DOTFILES}/config/${config}" "$target"
     fi
   done
 
@@ -204,7 +204,7 @@ setup_shell() {
 setup_git() {
   title "Setting up Git"
 
-  defaultName=$(git config user.name || true)
+  defaultName=$(git config user.name || echo "")
   defaultEmail=$(git config user.email || true)
 
   read -rp "Name [$defaultName]: " name
