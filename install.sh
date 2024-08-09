@@ -282,7 +282,6 @@ install)
   setup_homebrew
   setup_symlinks
   setup_shell
-  setup_git
   ;;
 uninstall)
   uninstall_shell
