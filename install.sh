@@ -117,7 +117,7 @@ setup_homebrew() {
   brew bundle --file "$DOTFILES/Brewfile"
 
   # add locales for glibc in homebrew
-  if brew list | grep -q "^perl$" && brew list | grep -q "^glibc$"; then
+  if brew list | grep -q "^glibc$"; then
     "$(brew --prefix glibc)/bin/localedef" -c -i C -f UTF-8 C.UTF-8 2>/dev/null
     "$(brew --prefix glibc)/bin/localedef" -c -i ja_JP -f UTF-8 ja_JP.UTF-8 2>/dev/null
   fi
