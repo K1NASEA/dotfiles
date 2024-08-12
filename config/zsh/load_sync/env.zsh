@@ -7,6 +7,9 @@ fi
 # PATH
 export PATH="${HOME}/repos/github.com/K1NASEA/dotfiles/bin:${PATH}"
 
+# USER
+export USER="$(/usr/bin/id -un)"
+
 # docker config
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 

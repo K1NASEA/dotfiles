@@ -1,2 +1,1 @@
-local title="$(hostname)"
-echo -ne "\e]2;${title}\a"
+echo -ne "\e]2;$HOST\a"
