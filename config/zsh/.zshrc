@@ -1,5 +1,5 @@
 # load Homebrew
-if command -v brew >/dev/null 2>&1; then
+if ! command -v brew >/dev/null 2>&1; then
     if [[ -f /opt/homebrew/bin/brew ]]; then
         # Homebrew exists at /opt/homebrew for arm64 macos
         eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -14,7 +14,7 @@ if command -v brew >/dev/null 2>&1; then
 fi
 
 # load sheldon
-if command -v sheldon >/dev/null 2>&1; then
+if ! command -v sheldon >/dev/null 2>&1; then
     export SHELDON_CONFIG_FILE="$XDG_CONFIG_HOME/sheldon/zsh_plugins.toml"
     export SHELDON_DATA_DIR="$XDG_DATA_HOME/sheldon_zsh"
     sheldon_cache="$XDG_CACHE_HOME/sheldon/sheldon.zsh"
