@@ -6,7 +6,9 @@ if locale -a | grep -q '^ja_JP\.utf8$'; then
 fi
 
 # PATH
-export PATH="${HOME}/repos/github.com/K1NASEA/dotfiles/bin:${PATH}"
+if ! echo "$PATH" | grep -q "${HOME}/.config/bin:${HOME}/bin"; then
+    export PATH="${HOME}/.config/bin:${HOME}/bin:${PATH}"
+fi
 
 # USER
 export USER="$(/usr/bin/id -un)"
