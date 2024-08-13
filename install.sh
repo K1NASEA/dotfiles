@@ -142,12 +142,17 @@ setup_symlinks() {
     fi
   done
 
+  if [ ! -d "${HOME}/.local" ]; then
+    info "Creating ${HOME}/.local"
+    mkdir -p "${HOME}/.local"
+    target="${HOME}/.local/bin"
+    info "Creating symlink for ~${target#"$HOME"}"
+    ln -snf "${DOTFILES}/bin" "$target"
+  fi
+
   if [ ! -d "$XDG_DATA_HOME" ]; then
     info "Creating $XDG_DATA_HOME"
     mkdir -p "$XDG_DATA_HOME"
-    target="${XDG_DATA_HOME}/bin"
-    info "Creating symlink for ~${target#"$HOME"}"
-    ln -snf "${DOTFILES}/bin" "$target"
   fi
 
   if [ ! -d "$XDG_STATE_HOME" ]; then

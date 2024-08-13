@@ -11,30 +11,26 @@ export LC_CTYPE='C.UTF-8'
 export TERM='xterm-256color'
 
 # load Homebrew
-if ! command -v brew >/dev/null 2>&1; then
-	if [[ -f /opt/homebrew/bin/brew ]]; then
-		# Homebrew exists at /opt/homebrew for arm64 macos
-		eval "$(/opt/homebrew/bin/brew shellenv)"
-	elif [[ -f /usr/local/bin/brew ]]; then
-		# or at /usr/local for intel macos
-		eval "$(/usr/local/bin/brew shellenv)"
-	elif [[ -d /home/linuxbrew/.linuxbrew ]]; then
-		# or from linuxbrew
-		test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
-		test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-	fi
+if [[ -f /opt/homebrew/bin/brew ]]; then
+	# Homebrew exists at /opt/homebrew for arm64 macos
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -f /usr/local/bin/brew ]]; then
+	# or at /usr/local for intel macos
+	eval "$(/usr/local/bin/brew shellenv)"
+elif [[ -d /home/linuxbrew/.linuxbrew ]]; then
+	# or from linuxbrew
+	test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+	test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 # load sheldon
-if [ "$SHELDON_CONFIG_FILE" != "$XDG_CONFIG_HOME/sheldon/bash_plugins.toml" ]; then
-	export SHELDON_CONFIG_FILE="$XDG_CONFIG_HOME/sheldon/bash_plugins.toml"
-	export SHELDON_DATA_DIR="$XDG_DATA_HOME/sheldon_bash"
-	sheldon_cache="$XDG_CACHE_HOME/sheldon/sheldon.bash"
-	if [[ ! -r "$sheldon_cache" || "$SHELDON_CONFIG_FILE" -nt "$sheldon_cache" ]]; then
-		mkdir -p "${XDG_CACHE_HOME}/sheldon"
-		sheldon source >"$sheldon_cache"
-	fi
-	# shellcheck source=/dev/null
-	source "$sheldon_cache"
-	unset sheldon_cache
+export SHELDON_CONFIG_FILE="$XDG_CONFIG_HOME/sheldon/bash_plugins.toml"
+export SHELDON_DATA_DIR="$XDG_DATA_HOME/sheldon_bash"
+sheldon_cache="$XDG_CACHE_HOME/sheldon/sheldon.bash"
+if [[ ! -r "$sheldon_cache" || "$SHELDON_CONFIG_FILE" -nt "$sheldon_cache" ]]; then
+	mkdir -p "${XDG_CACHE_HOME}/sheldon"
+	sheldon source >"$sheldon_cache"
 fi
+# shellcheck source=/dev/null
+source "$sheldon_cache"
+unset sheldon_cache
