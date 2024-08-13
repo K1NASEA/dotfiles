@@ -1,7 +1,8 @@
-# setup Language
+# setup Language and timezone
 if locale -a | grep -q '^ja_JP\.utf8$'; then
     export LANG='ja_JP.UTF-8'
     export LC_CTYPE='ja_JP.UTF-8'
+    export TZ='Asia/Tokyo'
 fi
 
 # PATH
