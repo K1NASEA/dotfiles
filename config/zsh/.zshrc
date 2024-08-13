@@ -14,7 +14,7 @@ if ! command -v brew >/dev/null 2>&1; then
 fi
 
 # load sheldon
-if ! command -v sheldon >/dev/null 2>&1; then
+if ! sheldon source >/dev/null 2>&1; then
     export SHELDON_CONFIG_FILE="$XDG_CONFIG_HOME/sheldon/zsh_plugins.toml"
     export SHELDON_DATA_DIR="$XDG_DATA_HOME/sheldon_zsh"
     sheldon_cache="$XDG_CACHE_HOME/sheldon/sheldon.zsh"
