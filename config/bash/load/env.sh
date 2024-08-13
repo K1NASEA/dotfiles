@@ -7,8 +7,8 @@ if locale -a | grep -q '^ja_JP\.utf8$'; then
 fi
 
 # PATH
-if ! echo "$PATH" | grep -q "${HOME}/.config/bin:${HOME}/bin"; then
-    export PATH="${HOME}/.config/bin:${HOME}/bin:${PATH}"
+if ! echo "$PATH" | grep -q "${HOME}/.local/bin:${HOME}/bin"; then
+    export PATH="${HOME}/.local/bin:${HOME}/bin:${PATH}"
 fi
 
 # docker config
