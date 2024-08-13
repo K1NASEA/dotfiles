@@ -137,7 +137,7 @@ setup_symlinks() {
     if [ -e "$target" ]; then
       info "~${target#"$HOME"} already exists... Skipping."
     else
-      info "Creating symlink for $config"
+      info "Creating symlink for ~${target#"$HOME"}"
       ln -snf "${DOTFILES}/config/${config}" "$target"
     fi
   done
@@ -145,6 +145,9 @@ setup_symlinks() {
   if [ ! -d "$XDG_DATA_HOME" ]; then
     info "Creating $XDG_DATA_HOME"
     mkdir -p "$XDG_DATA_HOME"
+    target="${XDG_DATA_HOME}/bin"
+    info "Creating symlink for ~${target#"$HOME"}"
+    ln -snf "${DOTFILES}/bin" "$target"
   fi
 
   if [ ! -d "$XDG_STATE_HOME" ]; then
