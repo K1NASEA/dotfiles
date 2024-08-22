@@ -19,6 +19,16 @@ defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file 
 github = "romkatv/zsh-defer"
 apply = ['source']
 
+[plugins.zsh-local-sync]
+local = '~/.config/zsh/local_sync'
+use = ['*.zsh']
+apply = ['source']
+
+[plugins.zsh-local-defer]
+local = '~/.config/zsh/local_defer'
+use = ['*.zsh']
+apply = ['defer']
+
 [plugins.zsh-load-sync]
 local = '~/.config/zsh/load_sync'
 use = ['*.zsh']
@@ -36,7 +46,7 @@ inline = '''
 '''
 
 [plugins.syntax-highlight]
-github = 'z-shell/F-Sy-H'
+github = 'zdharma-continuum/fast-syntax-highlighting'
 apply = ["defer"]
 
 [plugins.zsh-autosuggestions]

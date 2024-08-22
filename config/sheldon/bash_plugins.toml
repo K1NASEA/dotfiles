@@ -12,6 +12,10 @@
 
 shell = "bash"
 
+[plugins.bash-local]
+local = '~/.config/bash/local'
+use = ['*.sh']
+
 [plugins.bash-load]
 local = '~/.config/bash/load'
 use = ['*.sh']

@@ -1,2 +1,5 @@
 Brewfile.lock.json
 config/docker
+config/bash/local/**
+config/zsh/local_sync/**
+config/zsh/local_defer/**
