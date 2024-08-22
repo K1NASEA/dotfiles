@@ -127,10 +127,8 @@ setup_symlinks() {
   title "Creating symlinks"
 
   info "installing to $XDG_CONFIG_HOME"
-  if [ ! -d "$XDG_CONFIG_HOME" ]; then
-    info "Creating $XDG_CONFIG_HOME"
-    mkdir -p "$XDG_CONFIG_HOME"
-  fi
+  info "Creating $XDG_CONFIG_HOME"
+  mkdir -p "$XDG_CONFIG_HOME"
 
   for config in "${CONFIG_DIRS[@]}"; do
     target="$XDG_CONFIG_HOME/$(basename "$config")"
@@ -142,28 +140,22 @@ setup_symlinks() {
     fi
   done
 
-  if [ ! -d "${HOME}/.local" ]; then
-    info "Creating ${HOME}/.local"
-    mkdir -p "${HOME}/.local"
-    target="${HOME}/.local/bin"
-    info "Creating symlink for ~${target#"$HOME"}"
-    ln -snf "${DOTFILES}/bin" "$target"
-  fi
+  info "Creating ${HOME}/.local"
+  mkdir -p "${HOME}/.local"
+  target="${HOME}/.local/bin"
+  info "Creating symlink for ~${target#"$HOME"}"
+  ln -snf "${DOTFILES}/bin" "$target"
 
-  if [ ! -d "$XDG_DATA_HOME" ]; then
-    info "Creating $XDG_DATA_HOME"
-    mkdir -p "$XDG_DATA_HOME"
-  fi
+  info "Creating $XDG_DATA_HOME"
+  mkdir -p "$XDG_DATA_HOME"
 
-  if [ ! -d "$XDG_STATE_HOME" ]; then
-    info "Creating $XDG_STATE_HOME"
-    mkdir -p "$XDG_STATE_HOME"
-    chmod 0700 "$XDG_STATE_HOME"
-    mkdir -m 0700 "${XDG_STATE_HOME}/zsh"
-    mkdir -m 0700 "${XDG_STATE_HOME}/bash"
-    mkdir -m 0700 "${XDG_STATE_HOME}/less"
-    mkdir -m 0700 "${XDG_STATE_HOME}/wget"
-  fi
+  info "Creating $XDG_STATE_HOME"
+  mkdir -p "$XDG_STATE_HOME"
+  chmod 0700 "$XDG_STATE_HOME"
+  mkdir -m 0700 "${XDG_STATE_HOME}/zsh" 2>/dev/null
+  mkdir -m 0700 "${XDG_STATE_HOME}/bash" 2>/dev/null
+  mkdir -m 0700 "${XDG_STATE_HOME}/less" 2>/dev/null
+  mkdir -m 0700 "${XDG_STATE_HOME}/wget" 2>/dev/null
 }
 
 setup_shell() {
