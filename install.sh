@@ -25,7 +25,7 @@ COLOR_GREEN="\033[1;32m"
 COLOR_YELLOW="\033[1;33m"
 COLOR_BLUE="\033[1;34m"
 COLOR_PURPLE="\033[1;35m"
-COLOR_GRAY="\033[1;37m"
+COLOR_GRAY="\033[1;30m"
 COLOR_NONE="\033[0m"
 
 # Check the permissions of the execution user
