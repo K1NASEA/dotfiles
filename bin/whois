@@ -56,12 +56,11 @@ while getopts ":v" option; do
   esac
 done
 
-RESPONSE=$(curl --silent --show-error --fail "https://api.whoisproxy.info/whois/${1}")
+RESPONSE=$(curl --silent --show-error --fail "https://api.whoisproxy.info/whois/${1}") || exit $?
 
 if [ "$VERBOSE" = true ]; then
   echo "$RESPONSE" | jq '.'
 else
-  EMPTY=false
   echo "$RESPONSE" | jq -r '.results.raw[]' | while IFS= read -r line; do
     if [ -z "$line" ]; then
       echo -en "${COLOR_GRAY}"
