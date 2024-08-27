@@ -26,3 +26,6 @@ export KEYTIMEOUT=1  # Time in deciseconds (0.1 second) to wait for a key sequen
 # Editor
 export EDITOR='nvim'
 export GIT_EDITOR='nvim'
+
+# GPG
+export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
