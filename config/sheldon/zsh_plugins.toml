@@ -19,26 +19,7 @@ defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file 
 github = "romkatv/zsh-defer"
 apply = ['source']
 
-[plugins.zsh-local-sync]
-local = '~/.config/zsh/local_sync'
-use = ['*.zsh']
-apply = ['source']
-
-[plugins.zsh-local-defer]
-local = '~/.config/zsh/local_defer'
-use = ['*.zsh']
-apply = ['defer']
-
-[plugins.zsh-load-sync]
-local = '~/.config/zsh/load_sync'
-use = ['*.zsh']
-apply = ['source']
-
-[plugins.zsh-load-defer]
-local = '~/.config/zsh/load_defer'
-use = ['*.zsh']
-apply = ['defer']
-
+# Plugins
 [plugins.starship]
 inline = '''
     export STARSHIP_CONFIG="${XDG_CONFIG_HOME}/starship/starship.toml"
@@ -69,3 +50,25 @@ apply = ["defer"]
 
 [plugins.fzf-tab-completion.hooks]
 post = 'bindkey "^I" fzf_completion'
+
+# Load dotfiles settings
+[plugins.zsh-load-sync]
+local = '~/.config/zsh/load_sync'
+use = ['*.zsh']
+apply = ['source']
+
+[plugins.zsh-load-defer]
+local = '~/.config/zsh/load_defer'
+use = ['*.zsh']
+apply = ['defer']
+
+# Load private settings
+[plugins.zsh-local-sync]
+local = '~/.config/zsh/local_sync'
+use = ['*.zsh']
+apply = ['source']
+
+[plugins.zsh-local-defer]
+local = '~/.config/zsh/local_defer'
+use = ['*.zsh']
+apply = ['defer']

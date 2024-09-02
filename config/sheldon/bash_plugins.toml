@@ -12,14 +12,7 @@
 
 shell = "bash"
 
-[plugins.bash-local]
-local = '~/.config/bash/local'
-use = ['*.sh']
-
-[plugins.bash-load]
-local = '~/.config/bash/load'
-use = ['*.sh']
-
+# Plugins
 [plugins.starship]
 inline = '''
     export STARSHIP_CONFIG="${XDG_CONFIG_HOME}/starship/starship.toml"
@@ -36,3 +29,13 @@ use = ['fzf-bash-completion.sh']
 
 [plugins.fzf-tab-completion.hooks]
 post = 'bind -x "\"\t\": fzf_bash_completion"'
+
+# Load dotfiles settings
+[plugins.bash-load]
+local = '~/.config/bash/load'
+use = ['*.sh']
+
+# Load private settings
+[plugins.bash-local]
+local = '~/.config/bash/local'
+use = ['*.sh']
