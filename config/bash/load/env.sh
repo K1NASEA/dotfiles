@@ -31,3 +31,8 @@ export GIT_EDITOR='nvim'
 export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 GPG_TTY="$(tty)"
 export GPG_TTY
+
+# Public Cloud
+export AZURE_CONFIG_DIR="${XDG_DATA_HOME}/azure"
+export AWS_SHARED_CREDENTIALS_FILE="${XDG_CONFIG_HOME}/aws/credentials"
+export AWS_CONFIG_FILE="${XDG_CONFIG_HOME}/aws/config"
