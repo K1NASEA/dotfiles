@@ -5,3 +5,6 @@ config/zsh/local_sync/**
 config/zsh/local_defer/**
 !**/dummy.sh
 !**/dummy.zsh
+bin/*
+!bin/dotfiles
+!bin/whois
