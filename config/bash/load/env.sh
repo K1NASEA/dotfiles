@@ -32,6 +32,12 @@ export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 GPG_TTY="$(tty)"
 export GPG_TTY
 
+# Python
+export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
+
+# SQLite
+export SQLITE_HISTORY="${XDG_STATE_HOME}/sqlite/history"
+
 # Public Cloud
 export AZURE_CONFIG_DIR="${XDG_DATA_HOME}/azure"
 export AWS_SHARED_CREDENTIALS_FILE="${XDG_CONFIG_HOME}/aws/credentials"

@@ -14,6 +14,7 @@ CONFIG_DIRS=(
   "fzf"
   "git"
   "nvim"
+  "python"
   "sheldon"
   "starship"
   "wget"
