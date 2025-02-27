@@ -38,3 +38,4 @@ export GPG_TTY
 export AZURE_CONFIG_DIR="${XDG_DATA_HOME}/azure"
 export AWS_SHARED_CREDENTIALS_FILE="${XDG_CONFIG_HOME}/aws/credentials"
 export AWS_CONFIG_FILE="${XDG_CONFIG_HOME}/aws/config"
+export OCI_CLI_RC_FILE="${XDG_CONFIG_HOME}/oci/oci_cli_rc"
